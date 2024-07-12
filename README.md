@@ -6,6 +6,7 @@ To test knockout training with a toy problem (two-layer linear network), check o
 
 ## Getting LC responses and behavior from 1-to-1 network
 Various scripts are in /code/ that show how to pass stimuli through the 1-to-1 network (KO, DO, and noKO networks are available). Also included is how to generate fictive female stimuli from the tracked joint positions of the male and female fruit flies. 
+
 Note: Some of this code requires the tensorflow imports as well as GPU access.
 
 ## Issues/concerns
