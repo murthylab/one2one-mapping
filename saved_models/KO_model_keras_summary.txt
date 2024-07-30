@@ -1,0 +1,175 @@
+using gpu 1
+Model: "visionnet_model"
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ visionnet_image_input (Inp  [(None, 64, 228, 1)]      0         
+ utLayer)                                                        
+                                                                 
+ visionnet_layer0conv (Conv  (None, 32, 114, 32)       320       
+ 2D)                                                             
+                                                                 
+ visionnet_layer0_batch (Ba  (None, 32, 114, 32)       128       
+ tchNormalization)                                               
+                                                                 
+ visionnet_layer0_act (Acti  (None, 32, 114, 32)       0         
+ vation)                                                         
+                                                                 
+ visionnet_layer1conv (Sepa  (None, 16, 57, 32)        1344      
+ rableConv2D)                                                    
+                                                                 
+ visionnet_layer1_batch (Ba  (None, 16, 57, 32)        128       
+ tchNormalization)                                               
+                                                                 
+ visionnet_layer1_act (Acti  (None, 16, 57, 32)        0         
+ vation)                                                         
+                                                                 
+ visionnet_layer2conv (Sepa  (None, 8, 29, 32)         1344      
+ rableConv2D)                                                    
+                                                                 
+ visionnet_layer2_batch (Ba  (None, 8, 29, 32)         128       
+ tchNormalization)                                               
+                                                                 
+ visionnet_layer2_act (Acti  (None, 8, 29, 32)         0         
+ vation)                                                         
+                                                                 
+ visionnet_spatial_pool_lay  (None, 1, 1, 32)          7456      
+ er (DepthwiseConv2D)                                            
+                                                                 
+ flatten (Flatten)           (None, 32)                0         
+                                                                 
+ visionnet__embed_vars (Den  (None, 16)                528       
+ se)                                                             
+                                                                 
+=================================================================
+Total params: 11376 (44.44 KB)
+Trainable params: 11184 (43.69 KB)
+Non-trainable params: 192 (768.00 Byte)
+_________________________________________________________________
+Model: "KO_network"
+__________________________________________________________________________________________________
+ Layer (type)                Output Shape                 Param #   Connected to                  
+==================================================================================================
+ visionnet0_image_input (In  [(None, 64, 228, 1)]         0         []                            
+ putLayer)                                                                                        
+                                                                                                  
+ visionnet1_image_input (In  [(None, 64, 228, 1)]         0         []                            
+ putLayer)                                                                                        
+                                                                                                  
+ visionnet2_image_input (In  [(None, 64, 228, 1)]         0         []                            
+ putLayer)                                                                                        
+                                                                                                  
+ visionnet3_image_input (In  [(None, 64, 228, 1)]         0         []                            
+ putLayer)                                                                                        
+                                                                                                  
+ visionnet4_image_input (In  [(None, 64, 228, 1)]         0         []                            
+ putLayer)                                                                                        
+                                                                                                  
+ visionnet5_image_input (In  [(None, 64, 228, 1)]         0         []                            
+ putLayer)                                                                                        
+                                                                                                  
+ visionnet6_image_input (In  [(None, 64, 228, 1)]         0         []                            
+ putLayer)                                                                                        
+                                                                                                  
+ visionnet7_image_input (In  [(None, 64, 228, 1)]         0         []                            
+ putLayer)                                                                                        
+                                                                                                  
+ visionnet8_image_input (In  [(None, 64, 228, 1)]         0         []                            
+ putLayer)                                                                                        
+                                                                                                  
+ visionnet9_image_input (In  [(None, 64, 228, 1)]         0         []                            
+ putLayer)                                                                                        
+                                                                                                  
+ model (Functional)          (None, 16)                   11376     ['visionnet0_image_input[0][0]
+                                                                    ',                            
+                                                                     'visionnet1_image_input[0][0]
+                                                                    ',                            
+                                                                     'visionnet2_image_input[0][0]
+                                                                    ',                            
+                                                                     'visionnet3_image_input[0][0]
+                                                                    ',                            
+                                                                     'visionnet4_image_input[0][0]
+                                                                    ',                            
+                                                                     'visionnet5_image_input[0][0]
+                                                                    ',                            
+                                                                     'visionnet6_image_input[0][0]
+                                                                    ',                            
+                                                                     'visionnet7_image_input[0][0]
+                                                                    ',                            
+                                                                     'visionnet8_image_input[0][0]
+                                                                    ',                            
+                                                                     'visionnet9_image_input[0][0]
+                                                                    ']                            
+                                                                                                  
+ concatenate (Concatenate)   (None, 160)                  0         ['model[0][0]',               
+                                                                     'model[1][0]',               
+                                                                     'model[2][0]',               
+                                                                     'model[3][0]',               
+                                                                     'model[4][0]',               
+                                                                     'model[5][0]',               
+                                                                     'model[6][0]',               
+                                                                     'model[7][0]',               
+                                                                     'model[8][0]',               
+                                                                     'model[9][0]']               
+                                                                                                  
+ embedding_layer_dense1 (De  (None, 64)                   10304     ['concatenate[0][0]']         
+ nse)                                                                                             
+                                                                                                  
+ embedding_layer_batchnorm1  (None, 64)                   256       ['embedding_layer_dense1[0][0]
+  (BatchNormalization)                                              ']                            
+                                                                                                  
+ embedding_layer_act1 (Acti  (None, 64)                   0         ['embedding_layer_batchnorm1[0
+ vation)                                                            ][0]']                        
+                                                                                                  
+ embedding_layer_dense2 (De  (None, 23)                   1495      ['embedding_layer_act1[0][0]']
+ nse)                                                                                             
+                                                                                                  
+ embedding_layer_batchnorm2  (None, 23)                   92        ['embedding_layer_dense2[0][0]
+  (BatchNormalization)                                              ']                            
+                                                                                                  
+ embedding_layer (Activatio  (None, 23)                   0         ['embedding_layer_batchnorm2[0
+ n)                                                                 ][0]']                        
+                                                                                                  
+ mask_input (InputLayer)     [(None, 23)]                 0         []                            
+                                                                                                  
+ multiply (Multiply)         (None, 23)                   0         ['embedding_layer[0][0]',     
+                                                                     'mask_input[0][0]']          
+                                                                                                  
+ decision_dense0 (Dense)     (None, 128)                  3072      ['multiply[0][0]']            
+                                                                                                  
+ decision_batch0 (BatchNorm  (None, 128)                  512       ['decision_dense0[0][0]']     
+ alization)                                                                                       
+                                                                                                  
+ decision_act0 (Activation)  (None, 128)                  0         ['decision_batch0[0][0]']     
+                                                                                                  
+ decision_dense1 (Dense)     (None, 128)                  16512     ['decision_act0[0][0]']       
+                                                                                                  
+ decision_batch1 (BatchNorm  (None, 128)                  512       ['decision_dense1[0][0]']     
+ alization)                                                                                       
+                                                                                                  
+ decision_act1 (Activation)  (None, 128)                  0         ['decision_batch1[0][0]']     
+                                                                                                  
+ decision_dense2 (Dense)     (None, 128)                  16512     ['decision_act1[0][0]']       
+                                                                                                  
+ decision_batch2 (BatchNorm  (None, 128)                  512       ['decision_dense2[0][0]']     
+ alization)                                                                                       
+                                                                                                  
+ decision_act2 (Activation)  (None, 128)                  0         ['decision_batch2[0][0]']     
+                                                                                                  
+ forward_vels (Dense)        (None, 1)                    129       ['decision_act2[0][0]']       
+                                                                                                  
+ lateral_vels (Dense)        (None, 1)                    129       ['decision_act2[0][0]']       
+                                                                                                  
+ angular_vels (Dense)        (None, 1)                    129       ['decision_act2[0][0]']       
+                                                                                                  
+ pfast_pulse_bits (Dense)    (None, 1)                    129       ['decision_act2[0][0]']       
+                                                                                                  
+ pslow_pulse_bits (Dense)    (None, 1)                    129       ['decision_act2[0][0]']       
+                                                                                                  
+ sine_bits (Dense)           (None, 1)                    129       ['decision_act2[0][0]']       
+                                                                                                  
+==================================================================================================
+Total params: 61929 (241.91 KB)
+Trainable params: 60795 (237.48 KB)
+Non-trainable params: 1134 (4.43 KB)
+__________________________________________________________________________________________________
